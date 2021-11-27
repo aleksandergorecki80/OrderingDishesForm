@@ -5,13 +5,13 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 // Components
-import OrderForm from './components/OrderForm';
+import Order from './components/Order';
 
 function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <OrderForm />
+        <Order />
       </div>
     </Provider>
   );
