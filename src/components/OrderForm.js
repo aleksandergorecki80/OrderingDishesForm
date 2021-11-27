@@ -63,24 +63,28 @@ const OrderFormFunction = ({
           </Field>
         </div>
       </div>
-      <Field
-        name="no_of_slices"
-        type="number"
-        component={renderField}
-        label="Number of slices"
-        min="4"
-        max="10"
-      />
-      <Field
-        name="diameter"
-        type="diameter"
-        component={renderField}
-        label="Diameter"
-        min="20"
-        max="50"
-        step="5"
-      />
-      <Field
+      {type === 'pizza' && (
+        <Fragment>
+          <Field
+            name="no_of_slices"
+            type="number"
+            component={renderField}
+            label="Number of slices"
+            min="4"
+            max="10"
+          />
+          <Field
+            name="diameter"
+            type="diameter"
+            component={renderField}
+            label="Diameter"
+            min="20"
+            max="50"
+            step="5"
+          />
+        </Fragment>
+      )}
+      {type === 'sandwich' && (<Field
         name="slices_of_bread"
         type="number"
         component={renderField}
@@ -88,8 +92,8 @@ const OrderFormFunction = ({
         min="1"
         max="10"
         value="10"
-      />
-      <div>
+      />)}
+      {type === 'soup' && (<div>
         <label>Spiciness Scale</label>
         <div>
           <label>
@@ -183,7 +187,7 @@ const OrderFormFunction = ({
             10
           </label>
         </div>
-      </div>
+      </div>)}
     </form>
   );
 };
