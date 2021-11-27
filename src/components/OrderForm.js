@@ -7,11 +7,15 @@ const renderField = ({
   label,
   type,
   meta: { touched, error, warning },
+  min,
+  max,
+  step,
+  value
 }) => (
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} />
+      <input {...input} placeholder={label} type={type} min={min} max={max} step={step} value={value}/>
       {touched &&
         ((error && <span>{error}</span>) ||
           (warning && <span>{warning}</span>))}
@@ -48,9 +52,10 @@ const OrderFormFunction = ({
       />
       <Field
         name="preparation_time"
-        type="number"
+        type="time"
         component={renderField}
         label="Preparation time"
+        step="1"
       />
       <div>
         <label>Dish type</label>
@@ -75,13 +80,15 @@ const OrderFormFunction = ({
           />
           <Field
             name="diameter"
-            type="diameter"
+            type="range"
             component={renderField}
             label="Diameter"
             min="20"
             max="50"
             step="5"
+            value="25"
           />
+          <span>{diameter}</span>
         </Fragment>
       )}
       {type === 'sandwich' && (<Field
