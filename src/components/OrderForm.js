@@ -1,6 +1,19 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { validate } from '../utils/validation';
+
+// const validate = values => {
+//   const errors = {}
+//   if (!values.name) {
+//     errors.name = 'Required'
+//   } else if (values.name.length > 15) {
+//     errors.name = 'Must be 15 characters or less'
+//   }
+
+//   return errors
+// }
+
 
 const renderField = ({
   input,
@@ -23,6 +36,7 @@ const renderField = ({
   </div>
 );
 
+
 const OrderFormFunction = ({
   handleSubmit,
   name,
@@ -33,15 +47,6 @@ const OrderFormFunction = ({
   spiciness_scale,
   slices_of_bread,
 }) => {
-  console.log(
-    name,
-    preparation_time,
-    type,
-    no_of_slices,
-    diameter,
-    spiciness_scale,
-    slices_of_bread
-  );
   return (
     <form onSubmit={handleSubmit}>
       <Field
@@ -195,6 +200,7 @@ const OrderFormFunction = ({
           </label>
         </div>
       </div>)}
+      <button type="submit">Submit</button>
     </form>
   );
 };
@@ -202,6 +208,7 @@ const OrderFormFunction = ({
 const ReduxOrderForm = reduxForm({
   // a unique name for the form
   form: 'orderForm',
+  validate
 })(OrderFormFunction);
 
 const selector = formValueSelector('orderForm');
