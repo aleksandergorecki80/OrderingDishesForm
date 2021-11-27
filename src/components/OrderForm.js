@@ -3,17 +3,20 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { validate } from '../utils/validation';
 
-// const validate = values => {
-//   const errors = {}
-//   if (!values.name) {
-//     errors.name = 'Required'
-//   } else if (values.name.length > 15) {
-//     errors.name = 'Must be 15 characters or less'
-//   }
-
-//   return errors
-// }
-
+const dishTypes = [
+  {
+    value: 'pizza',
+    name: 'Pizza',
+  },
+  {
+    value: 'soup',
+    name: 'Soup',
+  },
+  {
+    value: 'sandwich',
+    name: 'Sandwich',
+  },
+];
 
 const renderField = ({
   input,
@@ -23,12 +26,20 @@ const renderField = ({
   min,
   max,
   step,
-  value
+  value,
 }) => (
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} min={min} max={max} step={step} value={value}/>
+      <input
+        {...input}
+        placeholder={label}
+        type={type}
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+      />
       {touched &&
         ((error && <span>{error}</span>) ||
           (warning && <span>{warning}</span>))}
@@ -36,17 +47,30 @@ const renderField = ({
   </div>
 );
 
+const renderSelectList = ({
+  input,
+  label,
+  options,
+  placeholder,
+  meta: { touched, error, warning },
+}) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <select {...input}>
+        <option value=''>{placeholder}</option>
+        {options.map((element) => {
+          return <option value={element.value} key={element.value}>{element.name}</option>;
+        })}
+      </select>
+      {touched &&
+        ((error && <span>{error}</span>) ||
+          (warning && <span>{warning}</span>))}
+    </div>
+  </div>
+);
 
-const OrderFormFunction = ({
-  handleSubmit,
-  name,
-  preparation_time,
-  type,
-  no_of_slices,
-  diameter,
-  spiciness_scale,
-  slices_of_bread,
-}) => {
+const OrderFormFunction = ({ handleSubmit, type, diameter }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
@@ -62,17 +86,13 @@ const OrderFormFunction = ({
         label="Preparation time"
         step="1"
       />
-      <div>
-        <label>Dish type</label>
-        <div>
-          <Field name="type" component="select">
-            <option />
-            <option value="pizza">Pizza</option>
-            <option value="soup">Soup</option>
-            <option value="sandwich">Sandwich</option>
-          </Field>
-        </div>
-      </div>
+      <Field
+        placeholder="--- Chose a type ---"
+        name="type"
+        component={renderSelectList}
+        label="Dish type"
+        options={dishTypes}
+      />
       {type === 'pizza' && (
         <Fragment>
           <Field
@@ -96,110 +116,114 @@ const OrderFormFunction = ({
           <span>{diameter}</span>
         </Fragment>
       )}
-      {type === 'sandwich' && (<Field
-        name="slices_of_bread"
-        type="number"
-        component={renderField}
-        label="Slices of bread"
-        min="1"
-        max="10"
-        value="10"
-      />)}
-      {type === 'soup' && (<div>
-        <label>Spiciness Scale</label>
+      {type === 'sandwich' && (
+        <Field
+          name="slices_of_bread"
+          type="number"
+          component={renderField}
+          label="Slices of bread"
+          min="1"
+          max="10"
+          value="10"
+        />
+      )}
+      {type === 'soup' && (
         <div>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="1"
-            />
-            1
-          </label>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="2"
-            />
-            2
-          </label>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="3"
-            />
-            3
-          </label>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="4"
-            />
-            4
-          </label>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="5"
-            />
-            5
-          </label>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="6"
-            />
-            6
-          </label>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="7"
-            />
-            7
-          </label>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="8"
-            />
-            8
-          </label>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="9"
-            />
-            9
-          </label>
-          <label>
-            <Field
-              name="spiciness_scale"
-              component="input"
-              type="radio"
-              value="10"
-            />
-            10
-          </label>
+          <label>Spiciness Scale</label>
+          <div>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="1"
+              />
+              1
+            </label>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="2"
+              />
+              2
+            </label>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="3"
+              />
+              3
+            </label>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="4"
+              />
+              4
+            </label>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="5"
+              />
+              5
+            </label>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="6"
+              />
+              6
+            </label>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="7"
+              />
+              7
+            </label>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="8"
+              />
+              8
+            </label>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="9"
+              />
+              9
+            </label>
+            <label>
+              <Field
+                name="spiciness_scale"
+                component="input"
+                type="radio"
+                value="10"
+              />
+              10
+            </label>
+          </div>
         </div>
-      </div>)}
+      )}
       <button type="submit">Submit</button>
     </form>
   );
@@ -208,7 +232,7 @@ const OrderFormFunction = ({
 const ReduxOrderForm = reduxForm({
   // a unique name for the form
   form: 'orderForm',
-  validate
+  validate,
 })(OrderFormFunction);
 
 const selector = formValueSelector('orderForm');
