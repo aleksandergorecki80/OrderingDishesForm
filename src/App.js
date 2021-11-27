@@ -4,10 +4,15 @@ import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
 
+// Components
+import OrderForm from './components/OrderForm';
+
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">Form</div>
+      <div className="App">
+        <OrderForm />
+      </div>
     </Provider>
   );
 }
