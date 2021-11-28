@@ -84,9 +84,8 @@ const OrderFormFunction = ({
               max="50"
               step="0.1"
               initialValue="35"
-            />
-            
-            <span>{renderDiameter(diameter)}</span>
+              className="range-style"
+            /> {renderDiameter(diameter)}
             </Form.Field>
           </Fragment>
         )}
@@ -130,6 +129,7 @@ const ReduxOrderForm = reduxForm({
     diameter: 35,
     no_of_slices: 6,
     spiciness_scale: 5,
+    slices_of_bread: 2,
     preparation_time: moment().format('hh:mm:ss'),
   },
 })(OrderFormFunction);

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Form, Label } from 'semantic-ui-react';
 
 const RenderRadio = ({
   input,
@@ -15,29 +16,44 @@ const RenderRadio = ({
   }
 
   return (
-    <div>
+    <Form.Field>
       <label>{label}</label>
-      {spiciness_scale.map((element) => {
-        if (element === parseInt(selectedValue, 10)) {
+      <div className="radio-buttons">
+        {spiciness_scale.map((element) => {
+          if (element === parseInt(selectedValue, 10)) {
+            return (
+              <div key={element} className="radio">
+                <input
+                  {...input}
+                  type={type}
+                  value={element}
+                  checked={true}
+                  className="radio-button"
+                />
+                <label>{element}</label>
+              </div>
+            );
+          }
           return (
-            <Fragment key={element}>
-              <input {...input} type={type} value={element} checked={true} />
+            <div key={element} className="radio">
+              <input
+                {...input}
+                type={type}
+                value={element}
+                checked={false}
+                className="radio-button"
+              />
               <label>{element}</label>
-            </Fragment>
+            </div>
           );
-        }
-        return (
-          <Fragment key={element}>
-            <input {...input} type={type} value={element} checked={false} />
-            <label>{element}</label>
-          </Fragment>
-        );
-      })}
-
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
-    </div>
+        })}
+      </div>
+      {touched && error && (
+        <Label basic color="red" pointing>
+          {error}
+        </Label>
+      )}
+    </Form.Field>
   );
 };
 
