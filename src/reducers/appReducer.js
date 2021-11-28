@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+  isLoading: true
+};
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -6,6 +8,7 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.payload,
+        isLoading: false
       };
       case 'REQUEST_ERROR':
         return action.err;

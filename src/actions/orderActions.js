@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const https = 'https://frosty-wood-6558.getsandbox.com/dishes';
+// const https = 'https://frosty-wood-6558.getsandbox.com/dishes1';
 
 // JSON Headers
 const config = {
@@ -16,7 +17,10 @@ export const submitNewOrder = (formData) => {
       const res = await axios.post(https, body, config);
       dispatch(requestSuccess(res.data));
     } catch (error) {
-      dispatch(requestError(error.response.data));
+      if(error.response) {
+        dispatch(requestError(error.response.data));
+      }
+      console.log(error)
     }
   };
 };

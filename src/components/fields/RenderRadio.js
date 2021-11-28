@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 import { Form, Label } from 'semantic-ui-react';
 
 const RenderRadio = ({

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Container, Card, Feed, Button, List } from 'semantic-ui-react';
+import Loading from '../static/loading.gif'
 
 const Summary = (props) => {
   const history = useHistory();
@@ -22,6 +23,8 @@ const Summary = (props) => {
     </List>
   );
 
+
+
   return (
     <Container className="center">
       <Card>
@@ -30,7 +33,7 @@ const Summary = (props) => {
         </Card.Content>
         <Card.Content>
           <Feed>
-            <Feed.Event>{body}</Feed.Event>
+            <Feed.Event>{props.app.isLoading ? <img src={Loading} alt="Loading"/> : body}</Feed.Event>
             <Feed.Event>
               <Button primary onClick={() => history.push('/')}>
                 {content.submit}
