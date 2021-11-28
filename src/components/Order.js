@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { submitNewOrder } from '../actions/orderActions';
 import axios from 'axios';
 
-const Order = () => {
+const Order = ({ submitNewOrder }) => {
   const [formaData, setFormData] = useState('');
 
   const submit = (values) => {
@@ -40,19 +40,21 @@ const Order = () => {
 
   useEffect(() => {
     if (formaData) {
-        const body = JSON.stringify(formaData)
-      axios
-        .post('https://frosty-wood-6558.getsandbox.com/dishes', body, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        submitNewOrder(formaData);
+    //     const body = JSON.stringify(formaData)
+    //   axios
+    //     .post('https://frosty-wood-6558.getsandbox.com/dishes', body, {
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //     })
+    //     .then((res) => {
+    //       console.log(res);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+
     }
   }, [formaData]);
 
@@ -70,5 +72,13 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     requestSuccess: (data) => {
+//       dispatch(requestSuccess(data));
+//     },
+//   };
+// };
 
 export default connect(null, mapDispatchToProps)(Order);

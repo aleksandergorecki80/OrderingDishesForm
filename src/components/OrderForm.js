@@ -111,9 +111,9 @@ const ReduxOrderForm = reduxForm({
   form: 'orderForm',
   validate,
   initialValues: {
-    // diameter: 35,
-    // no_of_slices: 6,
-    // spiciness_scale: 5,
+    diameter: 35,
+    no_of_slices: 6,
+    spiciness_scale: 5,
     preparation_time: moment().format('hh:mm:ss'),
   },
 })(OrderFormFunction);
