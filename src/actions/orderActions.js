@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const https = 'https://frosty-wood-6558.getsandbox.com/dishes';
-// const https = 'https://frosty-wood-6558.getsandbox.com/dishes1';
 
 // JSON Headers
 const config = {
