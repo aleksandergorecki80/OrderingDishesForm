@@ -26,7 +26,7 @@ const Summary = (props) => {
   );
 
   return (
-    <Container>
+    <Container className="center">
       <Card>
         <Card.Content>
           <Card.Header>{content.header}</Card.Header>

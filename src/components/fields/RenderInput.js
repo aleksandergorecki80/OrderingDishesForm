@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 const RenderInput = ({
     input,
@@ -10,7 +11,7 @@ const RenderInput = ({
     step,
     initialValue,
   }) => (
-    <div>
+    <Form.Field>
       <label>{label}</label>
       <div>
         <input
@@ -26,7 +27,7 @@ const RenderInput = ({
           ((error && <span>{error}</span>) ||
             (warning && <span>{warning}</span>))}
       </div>
-    </div>
+    </Form.Field>
   );
 
 export default RenderInput;
