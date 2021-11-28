@@ -15,12 +15,10 @@ const Summary = (props) => {
       {props.app.name && <List.Item><strong>Name:</strong> {props.app.name}</List.Item>}
       {props.app.preparation_time && <List.Item><strong> Preparation time:</strong>{props.app.preparation_time}</List.Item>}
       {props.app.type && <List.Item><strong>Dish type:</strong> {props.app.type}</List.Item>}
-      <List.List>
-        {props.app.type === 'pizza' && (props.app.no_of_slices && <p><strong>Number of slices:</strong> {props.app.no_of_slices}</p>)}
-        {props.app.type === 'pizza' && (props.app.diameter && <p><strong>Diameter:</strong> {props.app.diameter}</p>)}
-        {props.app.type === 'soup' && (props.app.spiciness_scale && <p><strong>Spiciness:</strong> {props.app.spiciness_scale}</p>)}
-        {props.app.type === 'sandwich' && (props.app.slices_of_bread  && <p><strong>Number of slices of bread:</strong> {props.app.slices_of_bread }</p>)}
-      </List.List>
+      {props.app.type === 'pizza' && (props.app.no_of_slices && <p><strong>Number of slices:</strong> {props.app.no_of_slices}</p>)}
+      {props.app.type === 'pizza' && (props.app.diameter && <p><strong>Diameter:</strong> {props.app.diameter}</p>)}
+      {props.app.type === 'soup' && (props.app.spiciness_scale && <p><strong>Spiciness:</strong> {props.app.spiciness_scale}</p>)}
+      {props.app.type === 'sandwich' && (props.app.slices_of_bread  && <p><strong>Number of slices of bread:</strong> {props.app.slices_of_bread }</p>)}
     </List>
   );
 
