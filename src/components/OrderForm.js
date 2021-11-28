@@ -2,6 +2,9 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { validate } from '../utils/validation';
+import RenderInput from './fields/RenderInput';
+import RenderSelectList from './fields/RenderSelectList';
+import RenderRadio from './fields/RenderRadio';
 
 const dishTypes = [
   {
@@ -18,78 +21,31 @@ const dishTypes = [
   },
 ];
 
-const renderField = ({
-  input,
-  label,
+const OrderFormFunction = ({
+  handleSubmit,
   type,
-  meta: { touched, error, warning },
-  min,
-  max,
-  step,
-  value,
-}) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <input
-        {...input}
-        placeholder={label}
-        type={type}
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-      />
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
-    </div>
-  </div>
-);
-
-const renderSelectList = ({
-  input,
-  label,
-  options,
-  placeholder,
-  meta: { touched, error, warning },
-}) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <select {...input}>
-        <option value=''>{placeholder}</option>
-        {options.map((element) => {
-          return <option value={element.value} key={element.value}>{element.name}</option>;
-        })}
-      </select>
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
-    </div>
-  </div>
-);
-
-const OrderFormFunction = ({ handleSubmit, type, diameter }) => {
+  diameter,
+  spiciness_scale,
+}) => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
         name="name"
         type="text"
-        component={renderField}
+        component={RenderInput}
         label="Dish name"
       />
       <Field
         name="preparation_time"
         type="time"
-        component={renderField}
+        component={RenderInput}
         label="Preparation time"
         step="1"
       />
       <Field
         placeholder="--- Chose a type ---"
         name="type"
-        component={renderSelectList}
+        component={RenderSelectList}
         label="Dish type"
         options={dishTypes}
       />
@@ -98,7 +54,7 @@ const OrderFormFunction = ({ handleSubmit, type, diameter }) => {
           <Field
             name="no_of_slices"
             type="number"
-            component={renderField}
+            component={RenderInput}
             label="Number of slices"
             min="4"
             max="10"
@@ -106,7 +62,7 @@ const OrderFormFunction = ({ handleSubmit, type, diameter }) => {
           <Field
             name="diameter"
             type="range"
-            component={renderField}
+            component={RenderInput}
             label="Diameter"
             min="20"
             max="50"
@@ -115,115 +71,30 @@ const OrderFormFunction = ({ handleSubmit, type, diameter }) => {
           />
           <span>{diameter}</span>
         </Fragment>
+      )}      
+      {type === 'soup' && (
+        <Field
+          name="spiciness_scale"
+          type="radio"
+          component={RenderRadio}
+          label="Spiciness Scale"
+          min="1"
+          max="10"
+          selectedValue={spiciness_scale}
+        />
       )}
       {type === 'sandwich' && (
         <Field
           name="slices_of_bread"
           type="number"
-          component={renderField}
+          component={RenderInput}
           label="Slices of bread"
           min="1"
           max="10"
           value="10"
         />
       )}
-      {type === 'soup' && (
-        <div>
-          <label>Spiciness Scale</label>
-          <div>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="1"
-              />
-              1
-            </label>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="2"
-              />
-              2
-            </label>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="3"
-              />
-              3
-            </label>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="4"
-              />
-              4
-            </label>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="5"
-              />
-              5
-            </label>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="6"
-              />
-              6
-            </label>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="7"
-              />
-              7
-            </label>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="8"
-              />
-              8
-            </label>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="9"
-              />
-              9
-            </label>
-            <label>
-              <Field
-                name="spiciness_scale"
-                component="input"
-                type="radio"
-                value="10"
-              />
-              10
-            </label>
-          </div>
-        </div>
-      )}
+
       <button type="submit">Submit</button>
     </form>
   );

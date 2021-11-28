@@ -8,12 +8,47 @@ export const validate = (values) => {
     errors.name = 'Only letters and digids allowed';
   }
 
-  if (!values.preparation_time){
-      errors.preparation_time = 'Required';
+  if (!values.preparation_time) {
+    errors.preparation_time = 'Required';
   }
 
-  if (!values.type){
+  if (!values.type) {
     errors.type = 'Required';
-}
+  }
+
+  if (!values.no_of_slices) {
+    errors.no_of_slices = 'Required';
+  } else if (isNaN(Number(values.no_of_slices))) {
+    errors.no_of_slices = 'Must be a number';
+  } else if (
+    Number(values.no_of_slices) < 4 ||
+    Number(values.no_of_slices) > 10
+  ) {
+    errors.no_of_slices = 'Number of slices must be between 4 and 10.';
+  }
+
+  if (!values.diameter) {
+    errors.diameter = 'Required';
+  } else if (isNaN(Number(values.diameter))) {
+    errors.diameter = 'Must be a number';
+  } else if (Number(values.diameter) < 20 || Number(values.diameter) > 50) {
+    errors.diameter = 'Pizza diamiter must be between 20 and 50.';
+  }
+
+  if (!values.spiciness_scale) {
+    errors.spiciness_scale = 'Required';
+  }
+
+  if (!values.slices_of_bread) {
+    errors.slices_of_bread = 'Required';
+  } else if (isNaN(Number(values.slices_of_bread))) {
+    errors.slices_of_bread = 'Must be a number';
+  } else if (
+    Number(values.slices_of_bread) < 1 ||
+    Number(values.slices_of_bread) > 10
+  ) {
+    errors.slices_of_bread = 'The value must be between 1 and 10.';
+  }
+
   return errors;
 };
