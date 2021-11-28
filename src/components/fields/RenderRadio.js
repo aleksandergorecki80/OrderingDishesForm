@@ -10,7 +10,7 @@ const RenderRadio = ({
   selectedValue,
 }) => {
   const spiciness_scale = [];
-  for (let index = min; index <= max; index++) {
+  for (let index = parseInt(min, 10); index <= max; index++) {
     spiciness_scale.push(index);
   }
 
