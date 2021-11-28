@@ -8,7 +8,7 @@ const RenderInput = ({
     min,
     max,
     step,
-    value,
+    initialValue,
   }) => (
     <div>
       <label>{label}</label>
@@ -20,7 +20,7 @@ const RenderInput = ({
           min={min}
           max={max}
           step={step}
-          value={value}
+          initialvalue={initialValue}
         />
         {touched &&
           ((error && <span>{error}</span>) ||

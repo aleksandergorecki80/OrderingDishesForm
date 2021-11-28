@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import moment from 'moment';
 import { validate } from '../utils/validation';
 import RenderInput from './fields/RenderInput';
 import RenderSelectList from './fields/RenderSelectList';
@@ -67,11 +68,11 @@ const OrderFormFunction = ({
             min="20"
             max="50"
             step="5"
-            value="25"
+            initialValue="35"
           />
           <span>{diameter}</span>
         </Fragment>
-      )}      
+      )}
       {type === 'soup' && (
         <Field
           name="spiciness_scale"
@@ -94,7 +95,6 @@ const OrderFormFunction = ({
           value="10"
         />
       )}
-
       <button type="submit">Submit</button>
     </form>
   );
@@ -104,37 +104,27 @@ const ReduxOrderForm = reduxForm({
   // a unique name for the form
   form: 'orderForm',
   validate,
+  initialValues: {
+    diameter: 35,
+    no_of_slices: 6,
+    spiciness_scale: 5,
+    preparation_time: moment().format('hh:mm:ss'),
+  },
 })(OrderFormFunction);
 
 const selector = formValueSelector('orderForm');
 
 const OrderForm = connect((state) => {
-  const {
-    name,
-    preparation_time,
-    type,
-    no_of_slices,
-    diameter,
-    spiciness_scale,
-    slices_of_bread,
-  } = selector(
+  const { type, diameter, spiciness_scale } = selector(
     state,
-    'name',
     'type',
-    'preparation_time',
-    'no_of_slices',
     'diameter',
-    'spiciness_scale',
-    'slices_of_bread'
+    'spiciness_scale'
   );
   return {
-    name,
-    preparation_time,
     type,
-    no_of_slices,
     diameter,
     spiciness_scale,
-    slices_of_bread,
   };
 })(ReduxOrderForm);
 

@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import OrderForm from './OrderForm';
 
 const Order = props => {
@@ -11,10 +10,6 @@ const Order = props => {
             <OrderForm onSubmit={submit}/>
         </Fragment>
     );
-};
-
-Order.propTypes = {
-    
 };
 
 export default Order;
