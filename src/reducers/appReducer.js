@@ -7,6 +7,8 @@ const appReducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
+      case 'REQUEST_ERROR':
+        return action.err;
     default:
       return state;
   }
