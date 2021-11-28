@@ -3,6 +3,7 @@ import OrderForm from './OrderForm';
 import { connect } from 'react-redux';
 import { submitNewOrder } from '../actions/orderActions';
 import { useHistory } from 'react-router-dom';
+import { Item } from 'semantic-ui-react'
 
 const Order = ({ submitNewOrder }) => {
     const history = useHistory();
@@ -60,13 +61,5 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     requestSuccess: (data) => {
-//       dispatch(requestSuccess(data));
-//     },
-//   };
-// };
 
 export default connect(null, mapDispatchToProps)(Order);

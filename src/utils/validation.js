@@ -49,6 +49,5 @@ export const validate = (values) => {
   ) {
     errors.slices_of_bread = 'The value must be between 1 and 10.';
   }
-console.log(errors)
   return errors;
 };

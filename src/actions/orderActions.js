@@ -10,10 +10,7 @@ const config = {
 };
 
 export const submitNewOrder = (formData) => {
-  // const body = JSON.stringify(formData)
-  const body = JSON.stringify({
-    name: '',
-  });
+  const body = JSON.stringify(formData);
   return async (dispatch) => {
     try {
       const res = await axios.post(https, body, config);
@@ -32,7 +29,6 @@ const requestSuccess = (payload) => {
 };
 
 const requestError = (err) => {
-    console.log(err)
   return {
     type: 'REQUEST_ERROR',
     err,

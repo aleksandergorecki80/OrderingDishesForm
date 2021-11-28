@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import moment from 'moment';
-import { Container, Button, Checkbox, Form } from 'semantic-ui-react';
+import { Container, Button, Header, Form } from 'semantic-ui-react';
 import { validate } from '../utils/validation';
 import RenderInput from './fields/RenderInput';
 import RenderSelectList from './fields/RenderSelectList';
@@ -34,7 +34,8 @@ const OrderFormFunction = ({
   spiciness_scale,
 }) => {
   return (
-    <Container>
+    <Container text className="margin-top">
+      <Header as='h1'>Order Form</Header>
       <Form onSubmit={handleSubmit}>
       <Form.Field>
         <Field
