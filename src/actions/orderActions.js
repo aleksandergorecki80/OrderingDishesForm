@@ -13,7 +13,7 @@ export const submitNewOrder = (formData) => {
     const body = JSON.stringify(formData)
     return (dispatch) => {
         return axios
-          .post('https://frosty-wood-6558.getsandbox.com/dishes', body, config)
+          .post(https, body, config)
           .then((res) => {
             dispatch(requestSuccess(res.data));
           })

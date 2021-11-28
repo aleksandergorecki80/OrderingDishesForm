@@ -2,9 +2,10 @@ import React, { Fragment, useState, useEffect } from 'react';
 import OrderForm from './OrderForm';
 import { connect } from 'react-redux';
 import { submitNewOrder } from '../actions/orderActions';
-import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const Order = ({ submitNewOrder }) => {
+    const history = useHistory();
   const [formaData, setFormData] = useState('');
 
   const submit = (values) => {
@@ -40,23 +41,10 @@ const Order = ({ submitNewOrder }) => {
 
   useEffect(() => {
     if (formaData) {
-        submitNewOrder(formaData);
-    //     const body = JSON.stringify(formaData)
-    //   axios
-    //     .post('https://frosty-wood-6558.getsandbox.com/dishes', body, {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-
+        submitNewOrder(formaData); 
+        history.push("/summary");
     }
-  }, [formaData]);
+  }, [formaData, history, submitNewOrder]);
 
   return (
     <Fragment>
