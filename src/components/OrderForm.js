@@ -22,6 +22,10 @@ const dishTypes = [
   },
 ];
 
+const renderDiameter = (diameter) => {
+  return diameter % 1 === 0 ? `${diameter}.0` : diameter;
+}
+
 const OrderFormFunction = ({
   handleSubmit,
   type,
@@ -67,10 +71,12 @@ const OrderFormFunction = ({
             label="Diameter"
             min="20"
             max="50"
-            step="5"
+            step="0.1"
             initialValue="35"
           />
-          <span>{diameter}</span>
+          <span>
+            {renderDiameter(diameter)}
+           </span>
         </Fragment>
       )}
       {type === 'soup' && (
@@ -105,9 +111,9 @@ const ReduxOrderForm = reduxForm({
   form: 'orderForm',
   validate,
   initialValues: {
-    diameter: 35,
-    no_of_slices: 6,
-    spiciness_scale: 5,
+    // diameter: 35,
+    // no_of_slices: 6,
+    // spiciness_scale: 5,
     preparation_time: moment().format('hh:mm:ss'),
   },
 })(OrderFormFunction);
