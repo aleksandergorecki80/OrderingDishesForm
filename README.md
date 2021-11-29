@@ -36,7 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Live preview
 
-The website is available by clicking: [OrderingDishesForm](http://localhost:3000)
+The website is available by clicking: [OrderingDishesForm](https://ordering-dishes-form.herokuapp.com)
 
 ## Tools
 
