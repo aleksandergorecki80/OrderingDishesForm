@@ -6,10 +6,6 @@ import Loading from '../static/loading.gif'
 
 const Summary = (props) => {
   const history = useHistory();
-  const content = {
-    header: props.app.id ? 'Order summary' : 'Order failed',
-    submit: props.app.id ? 'Next order' : 'Try again',
-  };
 
   const body = (
     <List>
@@ -22,8 +18,12 @@ const Summary = (props) => {
       {props.app.type === 'sandwich' && (props.app.slices_of_bread  && <p><strong>Number of slices of bread:</strong> {props.app.slices_of_bread }</p>)}
     </List>
   );
-
-
+  
+  const content = {
+    header: props.app.id ? 'Order summary' : 'Order failed',
+    submit: props.app.id ? 'Next order' : 'Try again',
+    body
+  };
 
   return (
     <Container className="center">
@@ -33,7 +33,7 @@ const Summary = (props) => {
         </Card.Content>
         <Card.Content>
           <Feed>
-            <Feed.Event>{props.app.isLoading ? <img src={Loading} alt="Loading"/> : body}</Feed.Event>
+            <Feed.Event>{props.app.isLoading ? <img src={Loading} alt="Loading"/> : content.body}</Feed.Event>
             <Feed.Event>
               <Button primary onClick={() => history.push('/')}>
                 {content.submit}
