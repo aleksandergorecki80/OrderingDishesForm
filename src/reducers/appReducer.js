@@ -12,6 +12,8 @@ const appReducer = (state = initialState, action) => {
       };
       case 'REQUEST_ERROR':
         return action.err;
+      case 'RESET_STATE':
+          return initialState;
     default:
       return state;
   }

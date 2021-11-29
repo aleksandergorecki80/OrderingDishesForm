@@ -37,3 +37,7 @@ const requestError = (err) => {
     err,
   };
 };
+
+export const resetState = () => {
+ return { type: 'RESET_STATE' }
+};

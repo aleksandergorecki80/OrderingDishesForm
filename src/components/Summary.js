@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Container, Card, Feed, Button, List } from 'semantic-ui-react';
 import Loading from '../static/loading.gif'
+import { resetState } from '../actions/orderActions';
 
 const Summary = (props) => {
   const history = useHistory();
@@ -25,6 +26,11 @@ const Summary = (props) => {
     body
   };
 
+  const onSubmit = () => {
+    props.resetState()
+    history.push('/')
+  }
+
   return (
     <Container className="center">
       <Card>
@@ -35,7 +41,7 @@ const Summary = (props) => {
           <Feed>
             <Feed.Event>{props.app.isLoading ? <img src={Loading} alt="Loading"/> : content.body}</Feed.Event>
             <Feed.Event>
-              <Button primary onClick={() => history.push('/')}>
+              <Button primary onClick={ onSubmit }>
                 {content.submit}
               </Button>
             </Feed.Event>
@@ -52,4 +58,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Summary);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    resetState: () => {
+      dispatch(resetState());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Summary);
