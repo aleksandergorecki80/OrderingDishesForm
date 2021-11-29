@@ -27,7 +27,7 @@ This instals all dependencies.
 In the project directory, you can run:
 
 ```
-npm start-dev
+npm run start-dev
 ```
 
 to run the app in the development mode.
