@@ -1,9 +1,16 @@
 const initialState = {
-  isLoading: true
+  isLoading: false,
+  error: false
 };
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'REQUEST_START':
+      return {
+        ...state,
+        isLoading: true
+      }
+
     case 'REQUEST_SUCCESS':
       return {
         ...state,
@@ -11,7 +18,11 @@ const appReducer = (state = initialState, action) => {
         isLoading: false
       };
       case 'REQUEST_ERROR':
-        return action.err;
+        return {
+          isLoading: false,
+          error: true,
+          ...action.err
+        };
       case 'RESET_STATE':
           return initialState;
     default:

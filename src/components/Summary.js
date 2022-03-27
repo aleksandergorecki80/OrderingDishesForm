@@ -21,7 +21,7 @@ const Summary = (props) => {
   );
   
   const content = {
-    header: props.app.id ? 'Order summary' : 'Order failed',
+    header: props.app.id ? 'Order summary' :( props.app.error ? 'Order failed' : props.app.isLoading && 'Loading...'),
     submit: props.app.id ? 'Next order' : 'Try again',
     body
   };

@@ -12,6 +12,7 @@ const config = {
 export const submitNewOrder = (formData) => {
   const body = JSON.stringify(formData);
   return async (dispatch) => {
+    dispatch(startRequest());
     try {
       const res = await axios.post(https, body, config);
       dispatch(requestSuccess(res.data));
@@ -23,6 +24,10 @@ export const submitNewOrder = (formData) => {
     }
   };
 };
+
+const startRequest = () => {
+  return { type: 'REQUEST_START' }
+ };
 
 const requestSuccess = (payload) => {
   return {
